@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'; // Import Footer
-import { ThemeProvider } from './context/ThemeContext'; // Import ThemeProvider
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import About from './pages/About';
+import Services from './pages/Services';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
@@ -11,12 +14,14 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <div className="flex-grow">
-            {/* Your Routes and main content */}
             <Routes>
-              {/* ... your existing routes */}
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              {/* Add other routes here if needed */}
             </Routes>
           </div>
-          <Footer /> {/* Include Footer */}
+          <Footer />
         </div>
       </Router>
     </ThemeProvider>

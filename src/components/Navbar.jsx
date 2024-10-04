@@ -1,13 +1,13 @@
 // src/components/Navbar.jsx
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { ThemeContext } from '../context/ThemeContext'; // Ensure the import path is correct
+import { ThemeContext } from '../context/ThemeContext';
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext); // Use useContext inside the component
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav className={`bg-blue-500 dark:bg-gray-800 p-4`}>
+    <nav className="bg-blue-500 dark:bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-white text-2xl font-bold">MyApp</h1>
         <div className="flex items-center space-x-4">
