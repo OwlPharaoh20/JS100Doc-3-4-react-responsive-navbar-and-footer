@@ -5,8 +5,9 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import { ThemeProvider } from './context/ThemeContext';
+import MultiStepForm from './components/MultiStepForm';
 import NotFound from './pages/NotFound';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/register" element={<MultiStepForm />} />
               <Route path="*" element={<NotFound />} />
               {/* Add other routes here if needed */}
             </Routes>

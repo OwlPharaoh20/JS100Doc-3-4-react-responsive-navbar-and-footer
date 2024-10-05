@@ -1,6 +1,5 @@
-// src/components/Navbar.jsx
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 
 const Navbar = () => {
@@ -11,15 +10,38 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-white text-2xl font-bold">MyApp</h1>
         <div className="flex items-center space-x-4">
-          <Link to="/" className="text-white hover:text-gray-200">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+            }
+          >
             Home
-          </Link>
-          <Link to="/about" className="text-white hover:text-gray-200">
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+            }
+          >
             About
-          </Link>
-          <Link to="/services" className="text-white hover:text-gray-200">
+          </NavLink>
+          <NavLink
+            to="/services"
+            className={({ isActive }) =>
+              isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+            }
+          >
             Services
-          </Link>
+          </NavLink>
+          <NavLink
+            to="/register"
+            className={({ isActive }) =>
+              isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+            }
+          >
+            Register
+          </NavLink>
           <button
             onClick={toggleTheme}
             className="text-white hover:text-gray-200 focus:outline-none"
