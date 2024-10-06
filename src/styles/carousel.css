@@ -1,0 +1,23 @@
+/* src/styles/carousel.css */
+
+/* Customize dots */
+.slick-dots li button:before {
+    color: #a0aec0; /* Tailwind Gray-400 */
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: #2b6cb0; /* Tailwind Blue-600 */
+  }
+  
+  /* Customize arrows */
+  .slick-prev:before,
+  .slick-next:before {
+    color: #2d3748; /* Tailwind Gray-800 */
+  }
+  
+  /* Adjust arrow size */
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 30px;
+  }
+  
