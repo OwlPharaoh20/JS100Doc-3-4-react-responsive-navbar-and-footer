@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
 
+
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
@@ -41,6 +42,14 @@ const Navbar = () => {
             }
           >
             Register
+          </NavLink>
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+            }
+          >
+            Search
           </NavLink>
           <button
             onClick={toggleTheme}

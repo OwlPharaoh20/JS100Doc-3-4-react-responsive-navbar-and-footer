@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import MultiStepForm from './components/MultiStepForm';
+import SearchableList from './components/SearchableList';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/register" element={<MultiStepForm />} />
+              <Route path="/search" element={<SearchableList />} />
               <Route path="*" element={<NotFound />} />
               {/* Add other routes here if needed */}
             </Routes>
