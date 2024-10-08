@@ -30,11 +30,60 @@ const MultiStepForm = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   
-    // Clear the error for the current field
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: '' });
+    // Validate the specific field
+    let error = '';
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) {
+          error = 'First name is required';
+        } else if (value.trim().length < 2) {
+          error = 'First name must be at least 2 characters';
+        }
+        break;
+      case 'lastName':
+        if (!value.trim()) {
+          error = 'Last name is required';
+        } else if (value.trim().length < 2) {
+          error = 'Last name must be at least 2 characters';
+        }
+        break;
+      case 'email':
+        if (!value.trim()) {
+          error = 'Email address is required';
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          error = 'Email address is invalid';
+        }
+        break;
+      case 'username':
+        if (!value.trim()) {
+          error = 'Username is required';
+        } else if (!/^\w{4,}$/.test(value)) {
+          error = 'Username must be at least 4 characters and contain only letters, numbers, and underscores';
+        }
+        break;
+      case 'password':
+        if (!value) {
+          error = 'Password is required';
+        } else if (value.length < 6) {
+          error = 'Password must be at least 6 characters';
+        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/g.test(value)) {
+          error = 'Password must contain uppercase, lowercase, number, and special character';
+        }
+        break;
+      case 'confirmPassword':
+        if (!value) {
+          error = 'Please confirm your password';
+        } else if (value !== formData.password) {
+          error = 'Passwords do not match';
+        }
+        break;
+      default:
+        break;
     }
+  
+    setErrors({ ...errors, [name]: error });
   };
+  
   
 
   // Function to move to the next step// Example validation in nextStep
