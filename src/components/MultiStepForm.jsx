@@ -1,5 +1,8 @@
 // src/components/MultiStepForm.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const MultiStepForm = () => {
   // State to hold form data
@@ -15,7 +18,11 @@ const MultiStepForm = () => {
   // State to track the current step
   const [currentStep, setCurrentStep] = useState(1);
 
+  // State to hold form errors
   const [errors, setErrors] = useState({});
+
+  // Initialize navigate
+  const navigate = useNavigate();
 
 
   // Function to handle input changes
@@ -53,13 +60,12 @@ const nextStep = () => {
     }
   
     if (isValid) {
-      setCurrentStep((prevStep) => prevStep + 1);
+      if (validateStep()) {
+        setCurrentStep((prevStep) => prevStep + 1);
+      }
     }
      
     //function to include validation before proceeding 
-    if (validateStep()) {
-      setCurrentStep((prevStep) => prevStep + 1);
-    }
   };
   
 
@@ -199,13 +205,13 @@ const nextStep = () => {
 
 
             <div className="flex justify-between">
-              <button
-                type="button"
-                onClick={nextStep}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Next
-              </button>
+            <button
+        type="button"
+        onClick={nextStep}
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Next
+      </button> 
             </div>
           </div>
         )}
