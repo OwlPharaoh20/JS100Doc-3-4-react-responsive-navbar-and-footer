@@ -1,5 +1,5 @@
 // src/components/MultiStepForm.jsx
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,6 +15,7 @@ const MultiStepForm = () => {
     confirmPassword: '',
   });
 
+  
   // State to track the current step
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -23,6 +24,12 @@ const MultiStepForm = () => {
 
   // Initialize navigate
   const navigate = useNavigate();
+
+  const [isStepValid, setIsStepValid] = useState(false);
+
+  useEffect(() => {
+    validateStep();
+  }, [formData, currentStep]);
 
 
   // Function to handle input changes
@@ -201,7 +208,9 @@ const nextStep = () => {
     }
   
     setErrors(stepErrors);
-    return Object.keys(stepErrors).length === 0;
+  const isValid = Object.keys(stepErrors).length === 0;
+  setIsStepValid(isValid);
+  return isValid;
   };
 
 
@@ -267,12 +276,16 @@ const nextStep = () => {
 
             <div className="flex justify-between">
             <button
-        type="button"
-        onClick={nextStep}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        Next
-      </button> 
+  type="button"
+  onClick={nextStep}
+  className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
+    !isStepValid ? 'opacity-50 cursor-not-allowed' : ''
+  }`}
+  disabled={!isStepValid}
+>
+  Next
+</button>
+ 
             </div>
           </div>
         )}
@@ -353,12 +366,16 @@ const nextStep = () => {
                 Back
               </button>
               <button
-                type="button"
-                onClick={nextStep}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Next
-              </button>
+  type="button"
+  onClick={nextStep}
+  className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
+    !isStepValid ? 'opacity-50 cursor-not-allowed' : ''
+  }`}
+  disabled={!isStepValid}
+>
+  Next
+</button>
+
             </div>
           </div>
         )}
@@ -389,11 +406,15 @@ const nextStep = () => {
                 Back
               </button>
               <button
-                type="submit"
-                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-              >
-                Submit
-              </button>
+  type="submit"
+  className={`bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ${
+    !isStepValid ? 'opacity-50 cursor-not-allowed' : ''
+  }`}
+  disabled={!isStepValid}
+>
+  Submit
+</button>
+
             </div>
           </div>
         )}
