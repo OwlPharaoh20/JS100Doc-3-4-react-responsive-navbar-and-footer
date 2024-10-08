@@ -203,6 +203,18 @@ const nextStep = () => {
     setErrors(stepErrors);
     return Object.keys(stepErrors).length === 0;
   };
+
+
+  const getPasswordStrength = (password) => {
+    let strength = 0;
+    if (password.length >= 6) strength++;
+    if (/(?=.*[a-z])/g.test(password)) strength++;
+    if (/(?=.*[A-Z])/g.test(password)) strength++;
+    if (/(?=.*\d)/g.test(password)) strength++;
+    if (/(?=.*[@$!%*?&])/g.test(password)) strength++;
+    return strength;
+  };
+  
   
   
   
@@ -285,6 +297,7 @@ const nextStep = () => {
 
 
 
+{/* Password Field with Strength Indicator and Validation */}
 <div className="mb-4">
   <label className="block mb-1">Password</label>
   <input
@@ -296,7 +309,24 @@ const nextStep = () => {
     required
   />
   {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+  {formData.password && (
+    <p
+      className={`text-sm mt-1 ${
+        getPasswordStrength(formData.password) <= 2
+          ? 'text-red-500'
+          : getPasswordStrength(formData.password) <= 4
+          ? 'text-yellow-500'
+          : 'text-green-500'
+      }`}
+    >
+      Password Strength:{' '}
+      <span className="font-bold">
+        {['Weak', 'Fair', 'Good', 'Strong', 'Very Strong'][getPasswordStrength(formData.password) - 1]}
+      </span>
+    </p>
+  )}
 </div>
+
  
 
 <div className="mb-4">
