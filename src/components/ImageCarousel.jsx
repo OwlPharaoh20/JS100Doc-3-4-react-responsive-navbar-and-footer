@@ -5,25 +5,27 @@ import 'slick-carousel/slick/slick.css'; // Import Slick Carousel CSS
 import 'slick-carousel/slick/slick-theme.css'; // Import Slick Carousel Theme CSS
 import '../styles/carousel.css';
 
+import snowHill from "../assets/snow_hill.avif";
+import sunset from "../assets/sunset.avif";
+import waterbody from "../assets/waterbody.avif";
 
 const ImageCarousel = () => {
   const images = [
     {
       id: 1,
-      src: 'https://via.placeholder.com/800x400?text=Image+1',
-      alt: 'Image 1',
+      src: snowHill,
+      alt: 'Snow Hill',
     },
     {
       id: 2,
-      src: 'https://via.placeholder.com/800x400?text=Image+2',
-      alt: 'Image 2',
+      src: sunset,
+      alt: 'Sunset',
     },
     {
       id: 3,
-      src: 'https://via.placeholder.com/800x400?text=Image+3',
-      alt: 'Image 3',
+      src: waterbody,
+      alt: 'Waterbody',
     },
-    // Add more images as needed
   ];
 
   const settings = {
