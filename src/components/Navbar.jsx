@@ -7,7 +7,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav className="bg-blue-500 dark:bg-gray-800 p-4">
+    <nav className="bg-blue-500 dark:bg-gray-800 p-4 sticky top-0 z-50 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-white text-2xl font-bold">MyApp</h1>
         <div className="flex items-center space-x-4">
@@ -35,6 +35,14 @@ const Navbar = () => {
           >
             Services
           </NavLink>
+          <NavLink
+  to="/faq"
+  className={({ isActive }) =>
+    isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+  }
+>
+  FAQ
+</NavLink>
           <NavLink
             to="/register"
             className={({ isActive }) =>

@@ -9,6 +9,8 @@ import MultiStepForm from './components/MultiStepForm';
 import SearchableList from './components/SearchableList';
 import NotFound from './pages/NotFound';
 import { ThemeProvider } from './context/ThemeContext';
+import Accordion from './components/Accordion';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
               <Route path="/register" element={<MultiStepForm />} />
               <Route path="/search" element={<SearchableList />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/faq" element={<Accordion />} />
               {/* Add other routes here if needed */}
             </Routes>
           </div>
