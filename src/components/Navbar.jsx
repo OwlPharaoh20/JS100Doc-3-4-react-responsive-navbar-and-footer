@@ -35,6 +35,17 @@ const Navbar = () => {
           >
             Services
           </NavLink>
+
+          <NavLink
+  to="/products"
+  className={({ isActive }) =>
+    isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+  }
+>
+  Products
+</NavLink> 
+
+
           <NavLink
   to="/faq"
   className={({ isActive }) =>
