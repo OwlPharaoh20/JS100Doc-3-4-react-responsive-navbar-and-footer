@@ -1,8 +1,6 @@
 // src/components/ImageCarousel.jsx
 import React from 'react';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css'; // Import Slick Carousel CSS
-import 'slick-carousel/slick/slick-theme.css'; // Import Slick Carousel Theme CSS
 import '../styles/carousel.css';
 
 import snowHill from "../assets/snow_hill.avif";
