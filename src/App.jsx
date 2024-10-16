@@ -13,11 +13,15 @@ import { ThemeProvider } from './context/ThemeContext';
 import Accordion from './components/Accordion';
 import ProductList from './components/ProductList';
 import ShoppingCart from './components/ShoppingCart';
+import Login from './components/Login';
+import AuthProvider from './context/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const handleAddToCart = (product) => {
+    console.log('Adding to cart:', product);
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
       if (existingItem) {
@@ -41,36 +45,51 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="flex flex-col min-h-screen">
-          <Navbar cartItemCount={cartItems.length} />
-          <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/register" element={<MultiStepForm />} />
-              <Route path="/search" element={<SearchableList />} />
-              <Route
-                path="/products"
-                element={
-                  <ProductList
-                    onAddToCart={handleAddToCart}
-                    onUpdateCartItem={handleUpdateCartItem}
-                  />
-                }
-              />
-              <Route path="/cart" element={<ShoppingCart cartItems={cartItems} />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/faq" element={<Accordion />} />
-              {/* Add other routes here if needed */}
-            </Routes>
+    <AuthProvider>
+      <ThemeProvider>
+        <Router>
+          <div className="flex flex-col min-h-screen">
+            <Navbar cartItemCount={cartItems.length} />
+            <div className="flex-grow">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/register" element={<MultiStepForm />} />
+                <Route path="/search" element={<SearchableList />} />
+                <Route
+                  path="/products"
+                  element={
+                    <PrivateRoute>
+                      <ProductList
+                        onAddToCart={handleAddToCart}
+                        onUpdateCartItem={handleUpdateCartItem}
+                      />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <PrivateRoute>
+                      <ShoppingCart
+                        cartItems={cartItems}
+                        onUpdateCartItem={handleUpdateCartItem}
+                      />
+                    </PrivateRoute>
+                  }
+                />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
+                <Route path="/faq" element={<Accordion />} />
+                {/* Add other routes here if needed */}
+              </Routes>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
-    </ThemeProvider>
+        </Router>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 

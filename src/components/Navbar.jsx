@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../context/ThemeContext';
-
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { user, logout, isAuthenticated } = useContext(AuthContext);
 
   return (
     <nav className="bg-blue-500 dark:bg-gray-800 p-4 sticky top-0 z-50 shadow-md">
@@ -35,25 +36,50 @@ const Navbar = () => {
           >
             Services
           </NavLink>
-
+          {isAuthenticated ? (
+            <>
+              <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                  isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+                }
+              >
+                Products
+              </NavLink>
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+                }
+              >
+                Cart
+              </NavLink>
+              <span className="text-white">Welcome, {user.username}</span>
+              <button
+                onClick={logout}
+                className="text-white hover:text-gray-200"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+              }
+            >
+              Login
+            </NavLink>
+          )}
           <NavLink
-  to="/products"
-  className={({ isActive }) =>
-    isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
-  }
->
-  Products
-</NavLink> 
-
-
-          <NavLink
-  to="/faq"
-  className={({ isActive }) =>
-    isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
-  }
->
-  FAQ
-</NavLink>
+            to="/faq"
+            className={({ isActive }) =>
+              isActive ? 'text-gray-200 font-bold' : 'text-white hover:text-gray-200'
+            }
+          >
+            FAQ
+          </NavLink>
           <NavLink
             to="/register"
             className={({ isActive }) =>
