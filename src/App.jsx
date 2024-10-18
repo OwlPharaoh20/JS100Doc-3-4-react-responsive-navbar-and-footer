@@ -16,80 +16,89 @@ import ShoppingCart from './components/ShoppingCart';
 import Login from './components/Login';
 import AuthProvider from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import Create from './components/Create';
+import Update from './components/Update';
+import Delete from './components/Delete';
+import ErrorBoundary from './components/ErrorBoundary';
+import PostsList from './components/PostsList'; // New import
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
+  // Function to handle adding items to the cart
   const handleAddToCart = (product) => {
-    console.log('Adding to cart:', product);
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
       if (existingItem) {
-        // Increment quantity
         return prevItems.map((item) =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       } else {
-        // Add new item
         return [...prevItems, { ...product, quantity: 1 }];
       }
     });
   };
 
+  // Function to handle updating items in the cart
   const handleUpdateCartItem = (productId, quantity) => {
     setCartItems((prevItems) =>
-      prevItems
-        .map((item) => (item.id === productId ? { ...item, quantity } : item))
-        .filter((item) => item.quantity > 0)
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity } : item
+      )
     );
   };
 
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <Router>
-          <div className="flex flex-col min-h-screen">
-            <Navbar cartItemCount={cartItems.length} />
-            <div className="flex-grow">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/register" element={<MultiStepForm />} />
-                <Route path="/search" element={<SearchableList />} />
-                <Route
-                  path="/products"
-                  element={
-                    <PrivateRoute>
-                      <ProductList
-                        onAddToCart={handleAddToCart}
-                        onUpdateCartItem={handleUpdateCartItem}
-                      />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/cart"
-                  element={
-                    <PrivateRoute>
-                      <ShoppingCart
-                        cartItems={cartItems}
-                        onUpdateCartItem={handleUpdateCartItem}
-                      />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path="/login" element={<Login />} />
-                <Route path="*" element={<NotFound />} />
-                <Route path="/faq" element={<Accordion />} />
-                {/* Add other routes here if needed */}
-              </Routes>
+    <ErrorBoundary>
+      <AuthProvider>
+        <ThemeProvider>
+          <Router>
+            <div className="flex flex-col min-h-screen">
+              <Navbar cartItemCount={cartItems.length} />
+              <div className="flex-grow">
+                <Routes>
+                  {/* Old routes */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/register" element={<MultiStepForm />} />
+                  <Route path="/search" element={<SearchableList />} />
+                  <Route
+                    path="/products"
+                    element={
+                      <PrivateRoute>
+                        <ProductList onAddToCart={handleAddToCart} />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/cart"
+                    element={
+                      <PrivateRoute>
+                        <ShoppingCart
+                          cartItems={cartItems}
+                          onUpdateCartItem={handleUpdateCartItem}
+                        />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="*" element={<NotFound />} />
+                  <Route path="/faq" element={<Accordion />} />
+
+                  {/* New CRUD routes */}
+                  <Route path="/create" element={<Create />} />
+                  <Route path="/update/:id" element={<Update />} />
+                  <Route path="/delete/:id" element={<Delete />} />
+                  <Route path="/posts" element={<PostsList />} />
+                </Routes>
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </Router>
-      </ThemeProvider>
-    </AuthProvider>
+          </Router>
+        </ThemeProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

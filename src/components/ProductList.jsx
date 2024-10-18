@@ -1,4 +1,3 @@
-// src/components/ProductList.jsx
 import React from 'react';
 import ProductCard from './ProductCard';
 
@@ -18,7 +17,12 @@ const products = [
   // Add more products as needed
 ];
 
-const ProductList = ({ onAddToCart }) => {
+const ProductList = () => {
+  const handleAddToCart = (product) => {
+    // Add product to cart logic here
+    console.log('Added to cart:', product);
+  };
+
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-bold mb-6">Products</h2>
@@ -27,7 +31,7 @@ const ProductList = ({ onAddToCart }) => {
           <ProductCard
             key={product.id}
             product={product}
-            onAddToCart={onAddToCart}
+            onAddToCart={handleAddToCart}
           />
         ))}
       </div>
