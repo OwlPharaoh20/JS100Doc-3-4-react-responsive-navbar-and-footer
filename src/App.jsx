@@ -22,6 +22,7 @@ import Delete from './components/Delete';
 import ErrorBoundary from './components/ErrorBoundary';
 import PostsList from './components/PostsList'; // New import
 import Dashboard from './pages/Dashboard'; // New import
+import Profile from './components/Profile'; // New import
 
 
 function App() {
@@ -93,7 +94,8 @@ function App() {
                   <Route path="/update/:id" element={<Update />} />
                   <Route path="/delete/:id" element={<Delete />} />
                   <Route path="/posts" element={<PostsList />} />
-                  <Route path="/dashboard" element={<Dashboard />} /> // New route
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/profile" element={<Profile />} /> // New route
                 </Routes>
               </div>
               <Footer />
@@ -101,10 +103,8 @@ function App() {
           </Router>
         </ThemeProvider>
       </AuthProvider>
-      </ErrorBoundary>
-    
+    </ErrorBoundary>
   );
 }
-
 
 export default App;
