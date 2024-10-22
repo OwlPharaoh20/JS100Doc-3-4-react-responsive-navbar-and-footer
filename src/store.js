@@ -16,4 +16,10 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer);
 
+const user = useSelector((state) => {
+  console.log("Redux User Data: ", state.user);
+  return state.user;
+}) || {};
+
+
 export default store;
