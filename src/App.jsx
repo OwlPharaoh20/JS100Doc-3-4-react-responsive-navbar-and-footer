@@ -23,6 +23,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import PostsList from './components/PostsList'; // New import
 import Dashboard from './pages/Dashboard'; // New import
 import Profile from './components/Profile'; // New import
+import Weather from './components/Weather'; // Import Weather Component
 
 
 function App() {
@@ -96,6 +97,7 @@ function App() {
                   <Route path="/posts" element={<PostsList />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} /> // New route
+                  <Route path="/weather" element={<Weather />} /> // New route for Weather component
                 </Routes>
               </div>
               <Footer />
