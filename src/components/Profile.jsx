@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  
+
   // Get current user data from Redux store, adding a fallback value
   const user = useSelector((state) => state.user) || {};
 
@@ -15,8 +15,6 @@ const Profile = () => {
     lastName: '',
     email: '',
   });
-
-  
 
   useEffect(() => {
     // Safely update formData when user data becomes available
@@ -44,14 +42,14 @@ const Profile = () => {
   try {
     return (
       <motion.div
-        className="container mx-auto p-6"
+        className="container mx-auto p-6 md:p-8 lg:p-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl font-bold mb-6">Profile Page</h2>
         {user && Object.keys(user).length > 0 ? (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="max-w-md mx-auto">
             <div className="mb-4">
               <label className="block mb-1">First Name</label>
               <input
@@ -59,7 +57,7 @@ const Profile = () => {
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded md:w-1/2 lg:w-1/3"
                 required
               />
             </div>
@@ -70,7 +68,7 @@ const Profile = () => {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded md:w-1/2 lg:w-1/3"
                 required
               />
             </div>
@@ -81,7 +79,7 @@ const Profile = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="border p-2 w-full rounded"
+                className="border p-2 w-full rounded md:w-1/2 lg:w-1/3"
                 required
               />
             </div>

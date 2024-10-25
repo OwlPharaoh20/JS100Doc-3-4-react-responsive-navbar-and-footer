@@ -8,9 +8,14 @@ export const ThemeProvider = ({ children }) => {
 
   // Check for saved user preference
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
+    try {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    } catch (error) {
+      console.error('Error retrieving theme from localstorage:', error);
+      setTheme('light'); // default to light theme if error occurs
     }
   }, []);
 
