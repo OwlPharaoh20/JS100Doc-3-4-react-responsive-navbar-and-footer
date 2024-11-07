@@ -2,10 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Weather = () => {
-  const [weatherData, setWeatherData] = useState(null);
-  const [city, setCity] = useState('New York');
 
+
+const Weather = () => {
+    // Add state for weather data
+  const [weatherData, setWeatherData] = useState(null);
+  // Add state for city
+  const [city, setCity] = useState('New York');
+  
+
+  // Fetch weather data when city changes
   useEffect(() => {
     const fetchWeather = async () => {
       try {

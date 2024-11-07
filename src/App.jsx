@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -24,7 +23,9 @@ import PostsList from './components/PostsList'; // New import
 import Dashboard from './pages/Dashboard'; // New import
 import Profile from './components/Profile'; // New import
 import Weather from './components/Weather'; // Import Weather Component
-
+import DynamicForm from './components/DynamicForm'; // Import Dynamic Form Component
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -56,12 +57,12 @@ function App() {
     <ErrorBoundary>
       <AuthProvider>
         <ThemeProvider>
+          <ToastContainer />
           <Router>
             <div className="flex flex-col min-h-screen">
               <Navbar cartItemCount={cartItems.length} />
               <div className="flex-grow">
                 <Routes>
-                  {/* Old routes */}
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/services" element={<Services />} />
@@ -89,15 +90,14 @@ function App() {
                   <Route path="/login" element={<Login />} />
                   <Route path="*" element={<NotFound />} />
                   <Route path="/faq" element={<Accordion />} />
-
-                  {/* New CRUD routes */}
                   <Route path="/create" element={<Create />} />
                   <Route path="/update/:id" element={<Update />} />
                   <Route path="/delete/:id" element={<Delete />} />
                   <Route path="/posts" element={<PostsList />} />
                   <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/profile" element={<Profile />} /> // New route
-                  <Route path="/weather" element={<Weather />} /> // New route for Weather component
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/weather" element={<Weather />} />
+                  <Route path="/dynamic-form" element={<DynamicForm />} />
                 </Routes>
               </div>
               <Footer />
