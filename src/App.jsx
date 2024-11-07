@@ -24,8 +24,11 @@ import Dashboard from './pages/Dashboard'; // New import
 import Profile from './components/Profile'; // New import
 import Weather from './components/Weather'; // Import Weather Component
 import DynamicForm from './components/DynamicForm'; // Import Dynamic Form Component
+import TodoList from './components/TodoList'; // Import To-Do List Component
 import { ToastContainer, toast } from 'react-toastify';
+import DataTable from './components/DataTable'; // New import
 import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -98,6 +101,8 @@ function App() {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/weather" element={<Weather />} />
                   <Route path="/dynamic-form" element={<DynamicForm />} />
+                  <Route path="/todo" element={<TodoList />} />
+                  <Route path="/data-table" element={<DataTable />} />
                 </Routes>
               </div>
               <Footer />
